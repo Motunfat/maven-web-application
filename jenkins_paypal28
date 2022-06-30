@@ -1,0 +1,41 @@
+node{
+    def mavenHome =tool name: 'maven3.8.6'
+stage('1cloneCode'){
+   sh "echo runnund a software build and deployment for paypal"
+    git "https://github.com/motunfat/maven-web-application"
+ } 
+ stage('2Test&Build'){
+     sh "${mavenHome}/bin/mvn install"
+ } 
+ /*
+ stage('3CodeQuality'){
+      sh "${mavenHome}/bin/mvn sonar:sonar"
+ }   
+ stage('4UploadArtifacts'){
+     sh "${mavenHome}/bin/mvn deploy"
+ } 
+ stage('5deploy_uat'){
+     //scp"scp"
+   deploy adapters: [tomcat9(credentialsId: 'tomcat2-credential', path: '', url: 'http://35.183.30.119:8080/')], contextPath: null, war: 'target/*war'
+ }
+ stage('6 approval'){
+     timeout(time:9, unit: 'HOURS'){
+ input message:'Application ready for deeployment, please review an approve'
+     }
+ }
+ stage('7deploy_prod'){
+     deploy adapters: [tomcat9(credentialsId: 'tomcat2-credential', path: '', url: 'http://35.183.30.119:8080/')], contextPath: null, war: 'target/*war'
+ }
+ stage('8Notification'){
+     emailext body: '''build status for frontend application
+
+regards
+Rsquare Technologies''', recipientProviders: [buildUser(), contributor(), developers()], subject: 'buiild status'
+ }
+ */
+}
+
+
+
+
+
